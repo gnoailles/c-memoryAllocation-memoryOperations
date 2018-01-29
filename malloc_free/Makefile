@@ -1,9 +1,9 @@
 TARGET  = malloc_free
 
-CC       = gcc
-CFLAGS   = -I./includes
+CC       = g++
+CFLAGS   = -W -Wextra -Wall -Werror -I./includes
 
-LINKER   = gcc
+LINKER   = g++
 LFLAGS   = -I./includes
 
 SRCDIR   = src

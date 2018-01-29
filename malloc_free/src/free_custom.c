@@ -8,7 +8,7 @@ void free_custom(void *ptr)
 {
 	if(ptr)
 	{
-		t_block* block = (ptr - sizeof(t_block));
+		t_block* block = (t_block*)ptr - 1;
 		block->free = true;
 
 		try_to_fusion();
