@@ -10,5 +10,7 @@ void free_custom(void *ptr)
 	{
 		t_block* block = (ptr - sizeof(t_block));
 		block->free = true;
+
+		try_to_fusion();
 	}
 }

@@ -22,7 +22,9 @@ void initialize_block(t_block* block);
 t_block* extend_heap(size_t size);
 
 t_block* find_block(size_t size);
-t_block* split_block (t_block* b, size_t size);
+void split_block (t_block* b, size_t size);
+
+void try_to_fusion();
 
 void* malloc_custom(size_t size);
 

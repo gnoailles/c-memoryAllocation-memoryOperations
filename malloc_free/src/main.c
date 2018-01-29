@@ -4,7 +4,7 @@
 
 int main()
 {
-	int* t = malloc_custom(sizeof(int)*32);
+	int* t = malloc_custom(sizeof(int)*4);
 	*t = 5;
 
 	float* f = malloc_custom(sizeof(float));
@@ -17,11 +17,10 @@ int main()
 	*c2 = 'z';
 
 	free_custom(t);
+	free_custom(f);
 
 	char* c3 = malloc_custom(sizeof(char));
 	*c3 = 'o';
-
-	split_block((t_block *) (c3 - sizeof(t_block)), 1);
 
 	return 0;
 
