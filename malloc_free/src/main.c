@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <malloc_custom.h>
 #include <free_custom.h>
+#include <memset_custom.h>
 
 int main()
 {
-	int* t = (int*)malloc_custom(sizeof(int)*4);
-	*t = 5;
+	char* t = (char*)calloc_custom(68,1);
 
 	float* f = (float*)malloc_custom(sizeof(float));
 	*f = 3.2f;
