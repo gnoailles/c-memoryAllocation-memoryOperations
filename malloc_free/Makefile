@@ -1,10 +1,10 @@
 TARGET  = malloc_free
 
 CC       = g++
-CFLAGS   = -W -Wextra -Wall -Werror -I./includes
+CFLAGS   = -m64 -W -Wextra -Wall -Werror -I./includes
 
 LINKER   = g++
-LFLAGS   = -I./includes
+LFLAGS   = -m64 -I./includes
 
 SRCDIR   = src
 OBJDIR   = obj

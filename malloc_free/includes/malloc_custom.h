@@ -16,11 +16,9 @@ typedef struct s_block {
 } t_block;
 
 
-#define ALIGNED_SIZE(size) (((((size) - 1) >> ALIGN_MASK) << ALIGN_MASK) + BLOCK_ALIGN)
-
-
 void* malloc_custom(size_t size);
 void* calloc_custom(size_t nitems, size_t size);
+void* realloc_custom(void* ptr, size_t new_size);
 
 void initialize_block(t_block* block);
 
@@ -30,5 +28,8 @@ t_block* find_block(size_t size);
 void split_block (t_block* b, size_t size);
 
 void try_to_fusion();
+void fusion_next(t_block* block);
+
+bool valid_block(t_block* block);
 
 #endif //MALLOC_FREE_MALLOC_CUSTOM_H
