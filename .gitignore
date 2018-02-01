@@ -1,5 +1,6 @@
 # Custom
 bin/
+lib/
 .idea/
 cmake-build-debug/
 *.o
