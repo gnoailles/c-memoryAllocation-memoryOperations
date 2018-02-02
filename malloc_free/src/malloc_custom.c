@@ -151,7 +151,9 @@ void split_block(t_block *b, size_t size)
 	}
 }
 
-void try_to_fusion()
+
+// Named try_to_fusion() in doc
+void fusion_all()
 {
 	if (HEAD != NULL)
 	{

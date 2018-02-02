@@ -10,8 +10,8 @@
 struct foo {
 	u_int32_t l;
 	double f;
-	short int sd;
 	char* ptr;
+	short int sd;
 };
 
 int main()
@@ -19,29 +19,29 @@ int main()
 	clock_t start, end;
 	double cpu_time_used;
 
-	size_t testSize = ALIGNED_SIZE(40000 * sizeof(struct foo));
+	size_t testSize = ALIGNED_SIZE(40000);
 
 
-	struct foo* arr1 = NULL;
-	struct foo* arr2 = NULL;
-	struct foo* arr3 = NULL;
-	struct foo* arr4 = NULL;
+	char* arr1 = NULL;
+	char* arr2 = NULL;
+	char* arr3 = NULL;
+	char* arr4 = NULL;
 	printf("\n=======Memory Performances=======\n");
 
-	printf("Array testing type : struct foo\n");
+	printf("Array testing type : char\n");
 	printf("Array testing size : %zu\n", testSize);
 
 	printf("\n-------C STD allocations-------\n");
 	{
 		start = clock();
-		arr3 = (struct foo*)malloc(testSize);
+		arr3 = (char*)malloc(testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("malloc\t\t:  %lfs cpu_time.\n", cpu_time_used);
 
 
 		start = clock();
-		arr4 = (struct foo*)calloc(testSize,1);
+		arr4 = (char*)calloc(testSize,1);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("calloc\t\t:  %lfs cpu_time.\n", cpu_time_used);
@@ -50,14 +50,14 @@ int main()
 	printf("\n-------custom allocations-------\n");
 	{
 		start = clock();
-		arr1 = (struct foo*)malloc_custom(testSize);
+		arr1 = (char*)malloc_custom(testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("malloc\t\t:  %lfs cpu_time.\n", cpu_time_used);
 
 
 		start = clock();
-		arr2 = (struct foo*)calloc_custom(testSize,1);
+		arr2 = (char*)calloc_custom(testSize,1);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("calloc\t\t:  %lfs cpu_time.\n", cpu_time_used);
@@ -138,25 +138,25 @@ int main()
 	printf("\n-------C STD realloc-------\n");
 	{
 		start = clock();
-		arr3 = (struct foo*)realloc(arr3,5000 * sizeof(struct foo));
+		arr3 = (char*)realloc(arr3,5000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("shrink to 5000\t:  %lfs cpu_time.\n", cpu_time_used);
 
 
 		start = clock();
-		arr3 = (struct foo*)realloc(arr3,10000 * sizeof(struct foo));
+		arr3 = (char*)realloc(arr3,10000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("expand to 10000 \n(w/o new alloc)\t:  %lfs cpu_time.\n", cpu_time_used);
 
 		start = clock();
-		arr4 = (struct foo*)realloc(arr4,80000 * sizeof(struct foo));
+		arr4 = (char*)realloc(arr4,80000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("expand to 80000 \n(last in heap)\t:  %lfs cpu_time.\n", cpu_time_used);
 		start = clock();
-		arr3 = (struct foo*)realloc(arr3,80000 * sizeof(struct foo));
+		arr3 = (char*)realloc(arr3,80000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("expand to 80000 \n(copy needed)\t:  %lfs cpu_time.\n", cpu_time_used);
@@ -166,25 +166,25 @@ int main()
 	printf("\n-------realloc-------\n");
 	{
 		start = clock();
-		arr1 = (struct foo*)realloc_custom(arr1,5000 * sizeof(struct foo));
+		arr1 = (char*)realloc_custom(arr1,5000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("shrink to 5000\t:  %lfs cpu_time.\n", cpu_time_used);
 
 
 		start = clock();
-		arr1 = (struct foo*)realloc_custom(arr1,10000 * sizeof(struct foo));
+		arr1 = (char*)realloc_custom(arr1,10000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("expand to 10000 \n(w/o new alloc)\t:  %lfs cpu_time.\n", cpu_time_used);
 
 		start = clock();
-		arr2 = (struct foo*)realloc_custom(arr2,80000 * sizeof(struct foo));
+		arr2 = (char*)realloc_custom(arr2,80000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("expand to 80000 \n(last in heap)\t:  %lfs cpu_time.\n", cpu_time_used);
 		start = clock();
-		arr1 = (struct foo*)realloc_custom(arr1,80000 * sizeof(struct foo));
+		arr1 = (char*)realloc_custom(arr1,80000);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("expand to 80000 \n(copy needed)\t:  %lfs cpu_time.\n", cpu_time_used);

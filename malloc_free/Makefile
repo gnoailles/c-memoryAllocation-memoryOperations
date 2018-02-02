@@ -16,8 +16,10 @@ SOURCES  := $(shell find $(SRCDIR) -name '*.c')
 INCLUDES := $(wildcard $(SRCDIR)/*.h)
 OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 SHARED_OBJECTS  := $(SOURCES:$(SRCDIR)/%.c=$(LIBDIR)/$(OBJDIR)/%.o)
+SHARED_OBJECTS  :=$(filter-out $(LIBDIR)/$(OBJDIR)/main.o, $(SHARED_OBJECTS))
 RM       = rm -rf
 
+.PHONY: all
 all: $(BINDIR)/$(TARGET) | $(BINDIR)
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
@@ -36,7 +38,7 @@ sharedlib: $(LIBDIR)/$(TARGET_LIB)
 
 $(LIBDIR)/$(TARGET_LIB) : $(SHARED_OBJECTS)
 	@mkdir -p $(LIBDIR)
-	@$(LINKER) $(SHARED_OBJECTS) -shared $(LDFLAGS) -o $@
+	@$(LINKER) $(SHARED_OBJECTS) -shared $(LFLAGS) -o $@
 	@echo "Linking shared lib complete!"
 
 
@@ -50,6 +52,7 @@ $(SHARED_OBJECTS): $(LIBDIR)/$(OBJDIR)/%.o : $(SRCDIR)/%.c
 .PHONY: clean
 clean:
 	@$(RM) $(OBJECTS)
+	@$(RM) $(SHARED_OBJECTS)
 	@echo "Cleanup complete!"
 
 .PHONY: fclean
@@ -59,4 +62,5 @@ fclean: clean
 	@$(RM) $(LIBDIR)/$(TARGET_LIB)
 	@echo "Shared Library removed!"
 
+.PHONY: re
 re  : fclean all sharedlib

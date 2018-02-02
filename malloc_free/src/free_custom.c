@@ -18,7 +18,7 @@ void free_custom(void *ptr)
 
 			MEMSET(ptr, 0, block->size);
 
-			try_to_fusion();
+			fusion_all();
 		}
 	}
 }
