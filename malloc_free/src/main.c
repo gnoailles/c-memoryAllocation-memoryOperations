@@ -73,17 +73,22 @@ int main()
 		printf("STL memset\t:  %lfs cpu_time.\n", cpu_time_used);
 
 		start = clock();
-		memset_char(arr1, 0xFF, testSize);
+		memset(arr4, 0x05, testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("memset_char\t:  %lfs cpu_time.\n", cpu_time_used);
-
+		printf("STL memset\t:  %lfs cpu_time.\n", cpu_time_used);
 
 		start = clock();
-		memset_word64(arr1, 0xFF, testSize);
+		memset_custom(arr1, 0xFF, testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("memset_word64\t:  %lfs cpu_time.\n", cpu_time_used);
+		printf("memset\t\t:  %lfs cpu_time.\n", cpu_time_used);
+
+		start = clock();
+		memset_custom(arr2, 0x00, testSize);
+		end = clock();
+		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+		printf("memset\t\t:  %lfs cpu_time.\n", cpu_time_used);
 	}
 
 
@@ -97,17 +102,10 @@ int main()
 
 
 		start = clock();
-		memcpy_char(arr2, arr1, testSize);
+		memcpy_custom(arr2, arr1, testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("memcpy_char\t:  %lfs cpu_time.\n", cpu_time_used);
-
-
-		start = clock();
-		memcpy_word64(arr2, arr1, testSize);
-		end = clock();
-		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("memcpy_word64\t:  %lfs cpu_time.\n", cpu_time_used);
+		printf("memcpy\t\t:  %lfs cpu_time.\n", cpu_time_used);
 	}
 
 
@@ -121,17 +119,17 @@ int main()
 
 
 		start = clock();
-		memmove_char(arr2, arr1, testSize);
+		memmove_custom(arr2, arr1, testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("memmove_char\t:  %lfs cpu_time.\n", cpu_time_used);
+		printf("memmove\t\t:  %lfs cpu_time.\n", cpu_time_used);
 
 
 		start = clock();
-		memmove_word64(arr2, arr1, testSize);
+		memmove_custom(arr2, arr1, testSize);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("memmove_word64\t:  %lfs cpu_time.\n", cpu_time_used);
+		printf("memmove\t\t:  %lfs cpu_time.\n", cpu_time_used);
 	}
 
 
@@ -197,7 +195,7 @@ int main()
 		free(arr4);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-		printf("free \t\t:  %lfs cpu_time.\n", cpu_time_used);
+		printf("free\t\t:  %lfs cpu_time.\n", cpu_time_used);
 
 
 		start = clock();

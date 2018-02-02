@@ -37,7 +37,7 @@ void* calloc_custom(size_t nitems, size_t size)
 	void* ptr = malloc_custom(size);
 
 	if(ptr)
-		MEMSET(ptr, 0, size);
+		memset_custom(ptr, 0, size);
 	return ptr;
 }
 
@@ -76,7 +76,7 @@ void* realloc_custom(void* ptr, size_t new_size)
 			else
 			{
 				new_block = malloc_custom(new_size);
-				MEMCPY(new_block,block,block->size);
+				memcpy_custom(new_block,block,block->size);
 				free_custom(block+1);
 
 			}
@@ -168,7 +168,7 @@ void fusion_all()
 
 				ptr->prev->next = ptr->next;
 
-				MEMSET(ptr, 0, sizeof(t_block));
+				memset_custom(ptr, 0, sizeof(t_block));
 			}
 		}
 	}
@@ -188,12 +188,12 @@ void fusion_next(t_block* block)
 
 			block->next = nextBlock->next;
 
-			MEMSET(nextBlock, 0, sizeof(t_block));
+			memset_custom(nextBlock, 0, sizeof(t_block));
 		}
 	}
 }
 
 bool valid_block(t_block *block)
 {
-	return (block != NULL && HEAD != NULL && block >= HEAD && block < sbrk(0));
+	return (block != NULL && HEAD != NULL && block >= (t_block*)HEAD && block < (t_block*)sbrk(0));
 }

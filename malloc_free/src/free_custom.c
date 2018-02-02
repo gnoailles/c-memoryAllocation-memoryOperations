@@ -16,7 +16,7 @@ void free_custom(void *ptr)
 
 			block->free = true;
 
-			MEMSET(ptr, 0, block->size);
+			memset_custom(ptr, 0, block->size);
 
 			fusion_all();
 		}
